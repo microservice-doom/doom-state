@@ -17,6 +17,7 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.IntStream;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -35,9 +36,7 @@ public class DoomState {
         logger.info("Initializing new game");
         player = new Player(100, 50);
 
-        for (int i = 0; i < 20; i++) {
-            demons.put(i, new Demon(i, 13, DemonType.Imp));
-        }
+        IntStream.range(0, 20).forEach(i -> demons.put(i, new Demon(i, 13, DemonType.Imp)));
     }
 
     @RequestMapping("/state")
